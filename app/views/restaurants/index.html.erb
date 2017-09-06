@@ -2,32 +2,23 @@
 
 <h1>Restaurants</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Category</th>
-      <th>Reviews</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
-  <tbody>
-    <% @restaurants.each do |restaurant| %>
-      <tr>
-        <td><%= restaurant.name %></td>
-        <td><%= restaurant.address %></td>
-        <td><%= restaurant.category %></td>
-        <td><%= restaurant.reviews %></td>
-        <td><%= link_to 'Show', restaurant %></td>
-        <td><%= link_to 'Edit', edit_restaurant_path(restaurant) %></td>
-        <td><%= link_to 'Destroy', restaurant, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Restaurant', new_restaurant_path %>
+<% @restaurants.each do |restaurant| %>
+  <div class="resto">
+    <div class="resto-name">
+      <h2 class="resto-title"><%= link_to restaurant.name, restaurant %></h2>
+      <h3 class="resto-category"><%= restaurant.category %></h3>
+      <p class="resto-address"><%= restaurant.address %></p>
+    </div>
+    <div class="resto-edit">
+    <p>
+      <!--<%= link_to edit_restaurant_path(restaurant) do %>
+        <i class="fa fa-pencil resto-icons" aria-hidden="true"></i>
+      <%end%> -->
+      <% link_to restaurant, method: :delete, data: { confirm: 'Are you sure?' } do %>
+        <i class="fa fa-trash resto-icons" aria-hidden="true"></i>
+      <%end%>
+      <%= link_to 'Add Review', new_restaurant_review_path(restaurant), class: 'btn' %></p>
+    </div>
+  </div>
+<% end %>
